@@ -15,3 +15,5 @@ Usage Guide
 4. Commit usage & description: To commit a repo, you use the command git commit (usually with -m to add a message). A      commit is basically a snapshot of what you are going to push to the repo and save.
 
 5. Push usage & description: To push a repo, you use the command git push which pushes all the staged content to the       remote repository.
+
+***Tried to paste screenshots into Pilot but was unable to. Wasn't sure what to doe with them***
