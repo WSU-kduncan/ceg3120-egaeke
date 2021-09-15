@@ -36,7 +36,7 @@ async def on_message(message):
         'Identity theft is not a joke, Jim! Millions of families suffer every year.',
     ]
 
-    if message.content == 'towel!':
+    if message.content == 'speak!':
         response = random.choice(the_office_quotes)
         await message.channel.send(response)
 
