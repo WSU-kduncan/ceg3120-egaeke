@@ -14,5 +14,5 @@ PART 2:
     6. I navigated to the instance menu and selected "Actions" -> "Security" -> "Change security groups" and then removed the default group and added mine.
     7. I navigated to the elastic ip tab and allocated a new ip address, then selected associate elastic ip address and added it to my instance.
     8. N/A
-    9. 
+    9. To change hostname you want to be in your instance and do "sudo vim /etc/hosts" then update the file with "127.0.0.1 localhost persistent-hostname", then type "sudo hostnamect-hostname ETHAN-AMI" and then reboot the instance in the instance manager of AWS to view the changes.
     10. N/A
