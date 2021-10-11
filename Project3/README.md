@@ -8,7 +8,7 @@ PART 1:
 PART 2:
     1. N/A
     2. When creating the instance, I was able to choose my VPC under the configure tab of the instance creation.
-    3. After creating the volume, I clicked "Actions" and chose "Attach volume" and then attached it to my instance. I had some issues with this because it created in zone us-east-1a and my VPC was in us-east-1d.
+    3. To create the volume, you want to go to the volume tab and click create volume. I had some issues with this because it created in zone us-east-1a and my VPC was in us-east-1d. After creating the volume, I clicked "Actions" and chose "Attach volume" and then attached it to my instance. 
     4. Yes, I auto-assigned it because I wasn't entirely sure what to put and the default ended up working out.
     5. I navigated to the instance summary and went to the tags tab. I added a new tag with the necessary information.
     6. I navigated to the instance menu and selected "Actions" -> "Security" -> "Change security groups" and then removed the default group and added mine.
