@@ -91,14 +91,18 @@ Resources:
           FromPort: '22'
           ToPort: '22'
           CidrIp: 130.108.0.0/16  # WSU CIDR
-        - IpProtocol: -1
-          FromPort: '-1'
-          ToPort: '-1'
-          CidrIp: 10.0.0.0/24  # internal traffic (???)
         - IpProtocol: tcp
           FromPort: '22'
           ToPort: '22'
-          CidrIp: 74.135.85.218/32  # Home CIDR
+          CidrIp: 10.0.0.0/16  # internal traffic
+        - IpProtocol: -1
+          FromPort: '-1'
+          ToPort: '-1'
+          CidrIp: 10.0.0.0/24
+        - IpProtocol: tcp
+          FromPort: '22'
+          ToPort: '22'
+          CidrIp: 74.135.85.218/32 # Home CIDR
         - IpProtocol: tcp
           FromPort: '1'
           ToPort: '65535'
@@ -135,5 +139,7 @@ Resources:
             #!/bin/bash -xe
             apt-get update && \
             apt-get install -y \
-              replace-me && \
+              git \
+              python3 \
+              pip3 \
             reboot
