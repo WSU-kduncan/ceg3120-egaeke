@@ -124,7 +124,7 @@ Resources:
         - Key: Application
           Value: !Ref 'AWS::StackId'
         - Key: Name
-          Value: CEG3350 Ubuntu
+          Value: CF-Instance
       NetworkInterfaces:
         - GroupSet:
             - !Ref Lab1SecurityGroup
@@ -137,6 +137,7 @@ Resources:
         Fn::Base64:
           !Sub |
             #!/bin/bash -xe
+            sudo hostname CF-Instance \
             apt-get update && \
             apt-get install -y \
               git \
