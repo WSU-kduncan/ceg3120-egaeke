@@ -86,7 +86,12 @@ Resources:
     Properties:
       Domain: vpc
       InstanceId: !Ref WebServ1Instance
-  # Create one more elastic IP for the last instance
+  Web2IPAddress:
+    Type: 'AWS::EC2::EIP'
+    DependsOn: AttachGateway
+    Properties:
+      Domain: vpc
+      InstanceId: !Ref WebServ2Instance
   Lab1SecurityGroup:
     Type: 'AWS::EC2::SecurityGroup'
     Properties:
@@ -111,7 +116,6 @@ Resources:
         - IpProtocol: HTTP
           FromPort: '80'
           CidrIp: 10.0.0.0/16 # internal traffic
-  # This defines one instance.  Make two more instances based on this (but no elastic IP)        
   PublicUbuntuInstance:
     Type: 'AWS::EC2::Instance'
     DependsOn: AttachGateway
@@ -169,7 +173,7 @@ Resources:
       NetworkInterfaces:
         - GroupSet:
             - !Ref Lab1SecurityGroup
-          AssociatePublicIpAddress: 'true'
+          AssociatePublicIpAddress: 'true' 
           DeviceIndex: '0'
           DeleteOnTermination: 'true'
           SubnetId: !Ref Subnet
@@ -199,7 +203,7 @@ Resources:
         - Key: Application
           Value: !Ref 'AWS::StackId'
         - Key: Name
-          Value: webserv1
+          Value: webserv2
       NetworkInterfaces:
         - GroupSet:
             - !Ref Lab1SecurityGroup
