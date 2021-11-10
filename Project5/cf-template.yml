@@ -128,7 +128,7 @@ Resources:
       Tags:
         - Key: Application
           Value: !Ref 'AWS::StackId'
-        - Key: Name
+        - Key: Name # should this be changed to ssh file???
           Value: proxy
       NetworkInterfaces:
         - GroupSet:
@@ -141,11 +141,12 @@ Resources:
       UserData:
         Fn::Base64:
           !Sub |
-            #!/bin/bash -xe
+          #!/bin/bash -xe
+            sudo apt install haproxy && \
+            apt install apache2 && \
+            apt-get install -y git && \
+            hostnamectl set-hostname PublicUbuntu --static && \
             apt-get update && \
-            # need to install haproxy
-            apt-get install -y git python3 python3-pip && \
-            hostnamectl set-hostname proxy && \
             reboot
   WebServ1Instance:
     Type: 'AWS::EC2::Instance'
@@ -172,14 +173,47 @@ Resources:
           DeviceIndex: '0'
           DeleteOnTermination: 'true'
           SubnetId: !Ref Subnet
-          PrivateIpAddress: 10.0.0.26 # make sure unique to the instance
+          PrivateIpAddress: 10.0.0.26
       UserData:
         Fn::Base64:
           !Sub |
             #!/bin/bash -xe
-            sudo apt install haproxy && \
             apt install apache2 && \
-            apt-get install -y git && \
-            hostnamectl set-hostname instanceOne --static && \
             apt-get update && \
+            hostnamectl set-hostname WebServ1 --static && \
             reboot
+  WebServ2Instance:
+    Type: 'AWS::EC2::Instance'
+    DependsOn: AttachGateway
+    Properties:
+      ImageId: !FindInMap 
+        - AWSRegionUbuntu
+        - !Ref 'AWS::Region'
+        - !FindInMap 
+          - AWSInstanceType2Arch
+          - t2.micro
+          - Arch
+      InstanceType: t2.micro
+      KeyName: !Ref KeyName
+      Tags:
+        - Key: Application
+          Value: !Ref 'AWS::StackId'
+        - Key: Name
+          Value: webserv1
+      NetworkInterfaces:
+        - GroupSet:
+            - !Ref Lab1SecurityGroup
+          AssociatePublicIpAddress: 'true'
+          DeviceIndex: '0'
+          DeleteOnTermination: 'true'
+          SubnetId: !Ref Subnet
+          PrivateIpAddress: 10.0.0.27
+      UserData:
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            apt install apache2 && \
+            apt-get update && \
+            hostnamectl set-hostname WebServ2 --static && \
+            reboot
+            
