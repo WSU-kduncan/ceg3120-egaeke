@@ -132,7 +132,7 @@ Resources:
       Tags:
         - Key: Application
           Value: !Ref 'AWS::StackId'
-        - Key: Name # should this be changed to ssh file???
+        - Key: ceg3120 # should this be changed to ssh file???
           Value: proxy
       NetworkInterfaces:
         - GroupSet:
