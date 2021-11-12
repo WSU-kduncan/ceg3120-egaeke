@@ -15,3 +15,6 @@ Part 2:
         E.) https://linuxize.com/post/how-to-edit-your-hosts-file/, 
     5.  see screenshots (none :( )
     6.  optional
+
+
+    * I wasn't able to create a stack because something was wrong with the security group, but I have not idea what it was. As a result, I couldn't really do a lot with the rest of the project.
