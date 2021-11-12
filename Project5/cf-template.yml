@@ -176,6 +176,14 @@ Resources:
           AssociatePublicIpAddress: 'true' 
           DeviceIndex: '0'
           DeleteOnTermination: 'true'
+          SubnetId: !Ref Subnet
+          PrivateIpAddress: 10.0.0.26
+      UserData:
+        Fn::Base64:
+          !Sub |
+            #!/bin/bash -xe
+            apt install apache2 && \
+            apt-get update && \
             hostnamectl set-hostname WebServ1 --static && \
             reboot
   WebServ2Instance:
